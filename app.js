@@ -114,7 +114,7 @@ app.use(express.static(__dirname + '/public'));
 app.use('/attendance', index);
 
 app.get('*', (req, res, next)=>{
-    res.redirect('/');
+    res.send('Welcome...');
 });
 
 

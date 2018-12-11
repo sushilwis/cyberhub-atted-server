@@ -91,7 +91,7 @@ io.on('connection', (socket) => {
 
 
 //database connection
-mongoose.connect(config.localDB, {useNewUrlParser: true, useCreateIndex: true}, ()=>{
+mongoose.connect(config.localDB, {useNewUrlParser: true, useCreateIndex: false}, ()=>{
   console.log('Connected to database...');
 });
 mongoose.Promise = global.Promise;

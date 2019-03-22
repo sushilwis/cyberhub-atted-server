@@ -13,6 +13,8 @@ const {Users} = require('./config/users');
 var config = require('./config/config');
 
 var index = require('./routes/index');
+// var googleApi = require('./routes/google-api');
+// var stream = require('./stream');
 var app = express();
 var PORT = process.env.PORT || 3000;
 var server = http.createServer(app);
@@ -91,9 +93,10 @@ io.on('connection', (socket) => {
 
 
 //database connection
-mongoose.connect(config.localDB, {useNewUrlParser: true, useCreateIndex: false}, ()=>{
+mongoose.connect(config.localDB, {useNewUrlParser: true, useCreateIndex: true}, ()=>{
   console.log('Connected to database...');
 });
+
 mongoose.Promise = global.Promise;
 
 // view engine setup
@@ -110,8 +113,10 @@ app.use(cookieParser());
 app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/public'));
 
-
+// googleApi
 app.use('/attendance', index);
+// app.use('/googleapi', googleApi);
+// app.use('/stream', stream);
 
 app.get('/', (req, res, next)=>{
     res.send('Welcome...');

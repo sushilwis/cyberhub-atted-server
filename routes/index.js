@@ -5,7 +5,6 @@ var router = express.Router();
 
 
 router.post('/addAttedData', function(req, res, next) {
-  // console.log(req.body);
   let periodData = new Period(req.body);
 
   periodData.save((err, savedData)=>{
@@ -129,6 +128,49 @@ router.post('/addStdListOnPeriod', function(req, res, next) {
   });  
 });
 
+
+
+
+
+
+
+
+router.get('/oauth2callback', function(req, res, next) {
+    console.log('from the redirect uri...');      
+});
+
+
+
+
+
+
+
+
+
+router.post('/getStudentAttnPercent', function(req, res, next) {
+  // console.log('from the redirect uri...');  
+  let searchData = {
+    org_id: req.body.org_id,
+    department_id: req.body.dept_id,
+    active: false
+  }
+
+  Period.find(searchData, (err, data)=>{
+    if(err){
+      res.json({
+        success: false,
+        msg: "Sorry, Something Wrong. Try Again.",
+        data: []
+      });
+    }else{
+      res.json({
+        success: true,
+        msg: "Data fetch successfully.",
+        data: data,
+      });
+    }
+  });
+});
 
 
 

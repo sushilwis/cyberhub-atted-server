@@ -6,7 +6,7 @@ var router = express.Router();
 
 router.post('/addAttedData', function(req, res, next) {
   let periodData = new Period(req.body);
-
+  
   periodData.save((err, savedData)=>{
     if(err){
       res.json({
